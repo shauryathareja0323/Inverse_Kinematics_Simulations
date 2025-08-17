@@ -2,24 +2,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-# Link lengths
-L1 = 20.0  # hip to knee
-L2 = 20.0  # knee to foot
+L1 = 20.0  # cm
+L2 = 20.0  # cm
 
 hip_pos = np.array([0, 0])
 
-# Angle constraints (degrees)
 hip_min, hip_max = 180, 360
 knee_min, knee_max = 0, 360
 
-# Initial foot position
 foot_x, foot_y = 0, -40
 
-# Last angles for continuity
 last_hip = 270
 last_knee = 270
 
-# Rectangle path (relative to neutral)
 rect_points = [
     (0, -28.28),    # Start
     (-10, -28.28),   # Right
@@ -107,7 +102,6 @@ def update_plot(foot_x, foot_y):
     plt.draw()
     plt.pause(0.5)
 
-# Simulate rectangle path
 plt.ion()
 fig = plt.figure(figsize=(6, 6))
 

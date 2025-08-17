@@ -1,24 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Link lengths
-L1 = 20.0  # hip to knee
-L2 = 20.0  # knee to foot
+
+L1 = 20.0  # cm
+L2 = 20.0  # cm
 
 hip_pos = np.array([0, 0])
 
-# Angle constraints (degrees)
 hip_min, hip_max = 180, 360
-knee_min, knee_max = 0, 360  # Clockwise bent leg only
+knee_min, knee_max = 0, 360  # To prebvent anti-clockwise movement
 
-# Neutral walking posture
 neutral_hip = 270
 neutral_knee = 270
 
-# Initial foot position
 foot_x, foot_y = 0, -40  # starting position
 
-# Track last chosen angles to keep continuity
 last_hip = neutral_hip
 last_knee = neutral_knee
 
@@ -55,7 +51,7 @@ def choose_best_solution(solutions):
     valid = [(hip, knee) for hip, knee in solutions if is_within_constraints(hip, knee)]
     if not valid:
         return None
-    # Prefer the solution closest to the last chosen one
+    
     valid.sort(key=lambda s: (abs(s[0] - last_hip) + abs(s[1] - last_knee)))
     chosen = valid[0]
     last_hip, last_knee = chosen
@@ -121,7 +117,6 @@ def on_key(event):
         foot_x += step
     update_plot()
 
-# Interactive mode
 plt.ion()
 fig = plt.figure(figsize=(6,6))
 fig.canvas.mpl_connect('key_press_event', on_key)
